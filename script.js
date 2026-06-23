@@ -13,10 +13,14 @@ async function loadData() {
 
     if (aktif) {
 
-      // GAMBAR
-      document.getElementById("bg").src = aktif.gambar;
+      // 🔥 GAMBAR (DIPAKSA LOAD ULANG BIAR TIDAK HITAM)
+      const img = document.getElementById("bg");
+      img.src = "";
+      setTimeout(() => {
+        img.src = aktif.gambar;
+      }, 100);
 
-      // RUNNING TEXT
+      // 🔥 RUNNING TEXT
       document.getElementById("runningText").innerHTML =
         "<span>" + aktif.teks + "</span>";
 
