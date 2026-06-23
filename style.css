@@ -1,84 +1,173 @@
-html, body{
-  height:100%;
+html,body{
   margin:0;
+  height:100%;
   overflow:hidden;
-  background:black;
-  font-family:Arial;
+  background:#000;
+  font-family:Arial,sans-serif;
 }
 
-/* ===== HEADER ===== */
+/* HEADER */
 #header{
   position:fixed;
   top:0;
   left:0;
-  width:100%;
-  height:50px;
-  background:rgba(0,0,0,0.75);
-  z-index:10000;
+  right:0;
+
+  height:56px;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
+  background:rgba(10,20,40,.45);
+
+  backdrop-filter:blur(10px);
+
+  z-index:1000;
 }
 
 #title{
   color:white;
-  font-size:18px;
-  font-weight:bold;
+
+  font-size:20px;
+
+  font-weight:700;
+
+  letter-spacing:.8px;
+
+  text-align:center;
 }
 
-/* ===== CLOCK (DI BAWAH HEADER) ===== */
+/* JAM */
 #clock{
+
   position:fixed;
-  top:50px;
-  right:10px;
+
+  top:64px;
+
+  right:12px;
+
+  padding:8px 12px;
+
+  border-radius:10px;
+
+  background:rgba(0,0,0,.55);
+
   color:white;
-  background:rgba(0,0,0,0.6);
-  padding:5px 8px;
+
   font-size:14px;
-  border-radius:5px;
-  z-index:10000;
+
+  z-index:1000;
+
+  backdrop-filter:blur(8px);
 }
 
-/* ===== GAMBAR (AMAN DARI HEADER & FOOTER) ===== */
+/* AREA GAMBAR */
 #bg{
+
   position:fixed;
-  top:50px;      /* penting */
-  bottom:60px;   /* penting */
+
+  top:56px;
+
+  bottom:60px;
+
   left:0;
+
   width:100%;
-  height:auto;
+
+  height:calc(100vh - 116px);
+
   object-fit:contain;
-  background:black;
+
   opacity:1;
-  transition:opacity 1s ease-in-out;
+
+  transition:
+    opacity .8s ease,
+    transform 12s linear;
+
+  transform:scale(1.02);
+
+  background:black;
+
   z-index:1;
 }
 
-/* ===== RUNNING TEXT ===== */
+/* RUNNING TEXT */
 #Running_Text{
+
   position:fixed;
+
   bottom:0;
+
   left:0;
+
   width:100%;
+
   height:60px;
-  background:rgba(0,0,0,0.9);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,.95),
+      rgba(25,25,25,.92)
+    );
+
   display:flex;
+
   align-items:center;
+
   overflow:hidden;
-  border-top:2px solid yellow;
-  z-index:10000;
+
+  z-index:1000;
+
+  border-top:
+    2px solid #ffd700;
 }
 
 #text{
-  color:yellow;
+
+  color:#ffd700;
+
   font-size:22px;
+
+  font-weight:600;
+
   white-space:nowrap;
+
   padding-left:100%;
+
   display:inline-block;
-  animation:marquee 20s linear infinite;
+
+  animation:
+    marquee 22s linear infinite;
 }
 
 @keyframes marquee{
-  0%{transform:translateX(0)}
-  100%{transform:translateX(-100%)}
+
+0%{
+transform:translateX(0);
+}
+
+100%{
+transform:translateX(-100%);
+}
+
+}
+
+/* HP */
+@media(max-width:768px){
+
+#title{
+font-size:16px;
+}
+
+#clock{
+top:60px;
+font-size:12px;
+}
+
+#text{
+font-size:18px;
+}
+
 }
