@@ -1,0 +1,15 @@
+<style>
+.ticker{
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  z-index: 9999;
+}
+
+#runningText{
+  color: yellow;
+  font-size: 24px;
+  background: rgba(0,0,0,0.6);
+  padding: 10px;
+}
+</style>
