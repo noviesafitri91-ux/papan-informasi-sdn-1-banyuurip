@@ -32,21 +32,30 @@ function showSlide(){
 
   document.getElementById("bg").src = gambar;
 
-  // RUNNING TEXT (RESET BIAR SINKRON)
+  // RUNNING TEXT
   const textEl = document.getElementById("text");
   textEl.innerText = item.teks || "";
 
-  // reset animasi biar mulai ulang setiap slide
+  // reset animasi
   textEl.style.animation = "none";
-  void textEl.offsetWidth; // trigger reflow
+  void textEl.offsetWidth;
   textEl.style.animation = "marquee 20s linear";
 
-  // NEXT SLIDE
+  /* HITUNG DURASI TEKS */
+  const panjangTeks = textEl.innerText.length;
+
+  // perkiraan durasi (lebih panjang teks = lebih lama)
+  const durasi = Math.max(8000, panjangTeks * 250);
+
   index++;
   if(index >= dataGlobal.length){
     index = 0;
   }
+
+  // ⏱️ GANTI SLIDE SETELAH TEKS SELESAI
+  setTimeout(showSlide, durasi);
 }
+
 
 /* LOAD DATA */
 async function loadData(){
@@ -58,11 +67,7 @@ async function loadData(){
 
     console.log("DATA:", dataGlobal);
 
-    // tampil pertama kali
     showSlide();
-
-    // slideshow otomatis
-    setInterval(showSlide, 8000);
 
   } catch(err){
     console.log(err);
@@ -70,6 +75,7 @@ async function loadData(){
       "Gagal memuat data";
   }
 }
+
 
 /* START */
 loadData();
