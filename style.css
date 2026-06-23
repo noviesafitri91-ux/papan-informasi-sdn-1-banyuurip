@@ -31,7 +31,8 @@ body{
   font-size:24px;
   white-space:nowrap;
   padding-left:100%;
-  animation:jalan 12s linear infinite;
+  display:inline-block;
+  animation:jalan 18s linear infinite;
 }
 
 @keyframes jalan{
