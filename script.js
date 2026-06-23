@@ -22,7 +22,7 @@ function showSlide(){
 
   const item = dataGlobal[index];
 
-  // GAMBAR DRIVE
+  // GAMBAR
   let gambar = item.gambar || "";
   let match = gambar.match(/\/d\/(.*?)\//);
 
@@ -30,21 +30,23 @@ function showSlide(){
     gambar = "https://drive.google.com/thumbnail?id=" + match[1] + "&sz=w1600";
   }
 
-  // SET GAMBAR
-  const bg = document.getElementById("bg");
-  bg.src = gambar;
+  document.getElementById("bg").src = gambar;
 
-  // RUNNING TEXT PER GAMBAR
-  document.getElementById("text").innerText =
-    item.teks || "";
+  // RUNNING TEXT (RESET BIAR SINKRON)
+  const textEl = document.getElementById("text");
+  textEl.innerText = item.teks || "";
 
-  // NEXT INDEX
+  // reset animasi biar mulai ulang setiap slide
+  textEl.style.animation = "none";
+  void textEl.offsetWidth; // trigger reflow
+  textEl.style.animation = "marquee 20s linear";
+
+  // NEXT SLIDE
   index++;
   if(index >= dataGlobal.length){
     index = 0;
   }
 }
-
 
 /* LOAD DATA */
 async function loadData(){
