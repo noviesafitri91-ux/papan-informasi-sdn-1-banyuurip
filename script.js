@@ -15,45 +15,55 @@ setInterval(updateClock, 1000);
 updateClock();
 
 
-/* TAMPIL SLIDE */
+/* TAMPIL SLIDE HALUS */
 function showSlide(){
 
   if(!dataGlobal || dataGlobal.length === 0) return;
 
   const item = dataGlobal[index];
 
-  // GAMBAR
-  let gambar = item.gambar || "";
-  let match = gambar.match(/\/d\/(.*?)\//);
-
-  if(match){
-    gambar = "https://drive.google.com/thumbnail?id=" + match[1] + "&sz=w1600";
-  }
-
-  document.getElementById("bg").src = gambar;
-
-  // RUNNING TEXT
+  const bg = document.getElementById("bg");
   const textEl = document.getElementById("text");
-  textEl.innerText = item.teks || "";
 
-  // reset animasi
-  textEl.style.animation = "none";
-  void textEl.offsetWidth;
-  textEl.style.animation = "marquee 20s linear";
+  // FADE OUT
+  bg.style.opacity = 0;
 
-  /* HITUNG DURASI TEKS */
-  const panjangTeks = textEl.innerText.length;
+  setTimeout(() => {
 
-  // perkiraan durasi (lebih panjang teks = lebih lama)
-  const durasi = Math.max(8000, panjangTeks * 250);
+    // GAMBAR
+    let gambar = item.gambar || "";
+    let match = gambar.match(/\/d\/(.*?)\//);
 
-  index++;
-  if(index >= dataGlobal.length){
-    index = 0;
-  }
+    if(match){
+      gambar = "https://drive.google.com/thumbnail?id=" + match[1] + "&sz=w1600";
+    }
 
-  // ⏱️ GANTI SLIDE SETELAH TEKS SELESAI
-  setTimeout(showSlide, durasi);
+    bg.src = gambar;
+
+    // FADE IN
+    bg.style.opacity = 1;
+
+    // RUNNING TEXT RESET
+    textEl.innerText = item.teks || "";
+
+    textEl.style.animation = "none";
+    void textEl.offsetWidth;
+    textEl.style.animation = "marquee 20s linear";
+
+    /* DURASI AKURAT */
+    const panjang = textEl.innerText.length;
+
+    // hitung lebih realistis + minimal 12 detik
+    const durasi = Math.max(12000, panjang * 180);
+
+    index++;
+    if(index >= dataGlobal.length){
+      index = 0;
+    }
+
+    setTimeout(showSlide, durasi);
+
+  }, 800); // delay transisi fade
 }
 
 
@@ -76,6 +86,4 @@ async function loadData(){
   }
 }
 
-
-/* START */
 loadData();
