@@ -1,6 +1,6 @@
-const URL = "https://script.google.com/macros/s/AKfycbxbBwiVfevQU9YKw-EE_7sN800WfkWFD61dBs69IKdLUX-hPl6y7kBkjtWprIjMkK3pTA/exec";
+document.addEventListener("DOMContentLoaded", async function(){
 
-async function loadData(){
+  const URL = "https://script.google.com/macros/s/AKfycbxbBwiVfevQU9YKw-EE_7sN800WfkWFD61dBs69IKdLUX-hPl6y7kBkjtWprIjMkK3pTA/exec";
 
   try {
     const res = await fetch(URL);
@@ -12,9 +12,8 @@ async function loadData(){
 
     const item = data[0];
 
-    // ===== GAMBAR =====
+    // GAMBAR
     let gambar = item.gambar || "";
-
     let match = gambar.match(/\/d\/(.*?)\//);
 
     if(match){
@@ -23,14 +22,13 @@ async function loadData(){
 
     document.getElementById("bg").src = gambar;
 
-    // ===== RUNNING TEXT (FIX FINAL) =====
-    document.getElementById("text").innerText =
-      item.teks || "Tidak ada teks";
+    // 🔥 RUNNING TEXT (FIX FINAL)
+    const teks = item.teks || "Memuat data...";
+    document.getElementById("text").innerText = teks;
 
-  } catch(err){
+  } catch (err) {
     console.log(err);
     document.getElementById("text").innerText = "Gagal load data";
   }
-}
 
-loadData();
+});
