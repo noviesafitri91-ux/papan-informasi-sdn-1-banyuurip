@@ -1,51 +1,73 @@
-async function loadData(){
+const URL = "https://script.google.com/macros/s/AKfycbxbBwiVfevQU9YKw-EE_7sN800WfkWFD61dBs69IKdLUX-hPl6y7kBkjtWprIjMkK3pTA/exec";
 
-  const URL = "https://script.google.com/macros/s/AKfycbxbBwiVfevQU9YKw-EE_7sN800WfkWFD61dBs69IKdLUX-hPl6y7kBkjtWprIjMkK3pTA/exec";
+let index = 0;
+let dataGlobal = [];
 
-  try {
+/* JAM DIGITAL */
+function updateClock(){
+  const now = new Date();
 
-    const res = await fetch(URL);
-    const data = await res.json();
+  const waktu = now.toLocaleTimeString("id-ID");
+  const tanggal = now.toLocaleDateString("id-ID");
 
-    console.log("DATA:", data);
+  document.getElementById("clock").innerText =
+    tanggal + " | " + waktu;
+}
 
-    if (!data || data.length === 0) return;
+setInterval(updateClock, 1000);
+updateClock();
 
-    const item = data[0];
 
-    // =======================
-    // GAMBAR
-    // =======================
-    let gambar = item.gambar || "";
+/* TAMPIL DATA */
+function showData(){
 
-    let match = gambar.match(/\/d\/(.*?)\//);
+  if(dataGlobal.length === 0) return;
 
-    if(match){
-      gambar = "https://drive.google.com/thumbnail?id=" + match[1] + "&sz=w1600";
-    }
+  const item = dataGlobal[index];
 
-    document.getElementById("bg").src = gambar;
+  // GAMBAR
+  let gambar = item.gambar || "";
+  let match = gambar.match(/\/d\/(.*?)\//);
 
-    // =======================
-    // RUNNING TEXT
-    // =======================
-    document.getElementById("text").innerText =
-      item.teks || "Memuat data...";
+  if(match){
+    gambar = "https://drive.google.com/thumbnail?id=" + match[1] + "&sz=w1600";
+  }
 
-  } catch (err) {
-    console.log(err);
-    document.getElementById("text").innerText = "Gagal load data";
+  document.getElementById("bg").src = gambar;
+
+  // RUNNING TEXT
+  document.getElementById("text").innerText =
+    item.teks || "";
+
+  index++;
+
+  if(index >= dataGlobal.length){
+    index = 0;
   }
 }
 
 
-// =======================
-// JALANKAN OTOMATIS
-// =======================
-document.addEventListener("DOMContentLoaded", function(){
+/* LOAD DATA */
+async function loadData(){
 
-  loadData(); // tampil pertama kali
+  try{
 
-  setInterval(loadData, 30000); // update tiap 30 detik
+    const res = await fetch(URL);
+    dataGlobal = await res.json();
 
-});
+    console.log("DATA:", dataGlobal);
+
+    showData();
+
+    setInterval(showData, 10000);
+
+  } catch(err){
+    console.log(err);
+    document.getElementById("text").innerText =
+      "Gagal load data";
+  }
+}
+
+
+/* START */
+loadData();
