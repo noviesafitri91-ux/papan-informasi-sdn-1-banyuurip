@@ -15,7 +15,7 @@ setInterval(updateClock, 1000);
 updateClock();
 
 
-/* SLIDE UTAMA */
+/* SLIDE PROFESIONAL */
 function showSlide(){
 
   if(!dataGlobal || dataGlobal.length === 0) return;
@@ -30,7 +30,6 @@ function showSlide(){
 
   setTimeout(() => {
 
-    // GAMBAR
     let gambar = item.gambar || "";
     let match = gambar.match(/\/d\/(.*?)\//);
 
@@ -43,26 +42,27 @@ function showSlide(){
     // FADE IN
     bg.style.opacity = 1;
 
-    // RUNNING TEXT
+    // TEXT
     textEl.innerText = item.teks || "";
 
+    // reset animasi biar smooth
     textEl.style.animation = "none";
     void textEl.offsetWidth;
-    textEl.style.animation = "marquee 20s linear";
+    textEl.style.animation = "marquee 20s linear infinite";
 
-    // NEXT INDEX
+    // NEXT
     index++;
     if(index >= dataGlobal.length){
       index = 0;
     }
 
-    // 🔥 FIX PENTING: DURASI TETAP (BUKAN BERGANTUNG TEKS)
-    const durasiSlide = 15000; // 15 detik stabil
+    // durasi stabil profesional
+    const durasi = 15000;
 
     clearTimeout(timer);
-    timer = setTimeout(showSlide, durasiSlide);
+    timer = setTimeout(showSlide, durasi);
 
-  }, 500); // fade cepat biar tidak delay lama
+  }, 700);
 }
 
 
