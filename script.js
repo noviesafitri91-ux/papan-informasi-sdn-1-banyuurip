@@ -1,9 +1,7 @@
 const URL = "https://script.google.com/macros/s/AKfycbyd3h9ZvUNybp4vKA-7grHeNSvRsWnzWU0UkPwcc2nZE-GWm1XWJuDSbdvSsEfcsJ5oxA/exec";
 
 async function loadData(){
-
 try{
-
 const res = await fetch(URL);
 const data = await res.json();
 
@@ -20,20 +18,26 @@ let gambar = item.gambar || "";
 let match = gambar.match(/\/d\/(.*?)\//);
 
 if(match){
-  gambar = "https://drive.google.com/thumbnail?id=" + match[1] + "&sz=w1600";
+gambar = "https://drive.google.com/thumbnail?id=" + match[1] + "&sz=w1600";
 }
 
 document.getElementById("bg").src = gambar;
+
+/* 🔥 RUNNING TEXT FIX (INI YANG DIPERBAIKI) */
+const aktif = data.filter(x => x.aktif === "YA");
+
+const running = aktif
+  .map(x => x.teks)
+  .filter(Boolean)
+  .join(" • ");
+
 document.getElementById("text").innerText =
-  item.teks ? item.teks : " ";
+running || " ";
 
 }catch(err){
-
 console.log(err);
 document.getElementById("text").innerText = "Gagal load data";
-
 }
-
 }
 
 loadData();
