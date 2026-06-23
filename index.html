@@ -1,69 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Papan Informasi SD</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
 
 <style>
-body {
-  margin: 0;
-  overflow: hidden;
-  background: black;
+body{
+ margin:0;
+ overflow:hidden;
 }
 
-#bg {
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  background: black;
+#bg{
+ position:fixed;
+ inset:0;
+ width:100vw;
+ height:100vh;
+ object-fit:contain;
+ background:white;
 }
 
-#runningText {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 50px;
-  background: rgba(0,0,0,0.7);
-  overflow: hidden;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
+#runningText{
+ position:fixed;
+ bottom:0;
+ width:100%;
+ height:50px;
+ background:rgba(0,0,0,.7);
+ z-index:999;
+ overflow:hidden;
+ display:flex;
+ align-items:center;
 }
 
-#runningText span {
-  display: inline-block;
-  white-space: nowrap;
-  color: yellow;
-  font-size: 24px;
-  padding-left: 100%;
-  animation: jalan 12s linear infinite;
+#textIsi{
+ color:yellow;
+ font-size:24px;
+ white-space:nowrap;
+ padding-left:100%;
+ animation:jalan 15s linear infinite;
 }
 
-@keyframes jalan {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
+@keyframes jalan{
+ from{transform:translateX(0)}
+ to{transform:translateX(-100%)}
 }
 </style>
-
 </head>
 
 <body>
 
-const img = document.createElement("img");
+<img id="bg">
 
-img.src = "https://drive.google.com/thumbnail?id=18IGkH4rYrvlBLM7PV9VYLm5QAh72OxHs&sz=w1600";
-
-img.style.width = "300px";
-
-document.body.appendChild(img);
-
-<div id="runningText"></div>
+<div id="runningText">
+<span id="textIsi"></span>
+</div>
 
 <script src="script.js"></script>
 
 </body>
 </html>
+
