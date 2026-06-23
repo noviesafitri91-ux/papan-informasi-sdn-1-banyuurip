@@ -13,10 +13,10 @@ async function loadData() {
 
     if (aktif) {
 
-      // 🔥 GAMBAR
+      // GAMBAR
       document.getElementById("bg").src = aktif.gambar;
 
-      // 🔥 RUNNING TEXT
+      // RUNNING TEXT
       document.getElementById("runningText").innerHTML =
         "<span>" + aktif.teks + "</span>";
 
