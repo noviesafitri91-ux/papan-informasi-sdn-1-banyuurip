@@ -4,7 +4,6 @@ body{
   background:black;
 }
 
-/* background gambar */
 #bg{
   position:fixed;
   inset:0;
@@ -12,8 +11,6 @@ body{
   height:100vh;
   object-fit:contain;
   background:white;
-  opacity:0;
-  transition:opacity 1s ease;
 }
 
 #bg.show{
