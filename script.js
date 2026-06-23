@@ -1,6 +1,7 @@
 const URL = "https://script.google.com/macros/s/AKfycbxbBwiVfevQU9YKw-EE_7sN800WfkWFD61dBs69IKdLUX-hPl6y7kBkjtWprIjMkK3pTA/exec";
 
 async function loadData(){
+
   try {
     const res = await fetch(URL);
     const data = await res.json();
@@ -11,7 +12,7 @@ async function loadData(){
 
     const item = data[0];
 
-    // ===== GAMBAR (tetap seperti kamu) =====
+    // ===== GAMBAR =====
     let gambar = item.gambar || "";
 
     let match = gambar.match(/\/d\/(.*?)\//);
@@ -22,10 +23,11 @@ async function loadData(){
 
     document.getElementById("bg").src = gambar;
 
+    // ===== RUNNING TEXT (FIX FINAL) =====
     document.getElementById("text").innerText =
-  (data[0] && data[0].teks) ? data[0].teks : "Tidak ada teks";
+      item.teks || "Tidak ada teks";
 
-  } catch(err) {
+  } catch(err){
     console.log(err);
     document.getElementById("text").innerText = "Gagal load data";
   }
