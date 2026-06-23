@@ -1,29 +1,38 @@
-document.addEventListener("DOMContentLoaded", loadData);
+const URL = "https://script.google.com/macros/s/AKfycbyd3h9ZvUNybp4vKA-7grHeNSvRsWnzWU0UkPwcc2nZE-GWm1XWJuDSbdvSsEfcsJ5oxA/exec";
 
-async function loadData() {
-  try {
-    const res = await fetch("https://script.google.com/macros/s/AKfycbxGjGwsDfX4aF7MkzBrXXw3rI7ItysygcRCmEgJVs1vUp6SAmhN_o2o4kCN-ViIQsOUag/exec");
-    const data = await res.json();
+async function loadData(){
 
-    console.log("DATA:", data);
+try{
 
-    if (!data || data.length === 0) return;
+const res = await fetch(URL);
+const data = await res.json();
 
-    const item = data[0];
+console.log(data);
 
-    // GANTI LINK DRIVE MENJADI LINK GAMBAR LANGSUNG
-    let gambar = item.gambar || "";
+if(!data || data.length === 0) return;
 
-    gambar = gambar.replace(
-      /https:\/\/drive\.google\.com\/file\/d\/(.*?)\/view.*/,
-      "https://drive.google.com/thumbnail?id=$1&sz=w1600"
-    );
+const item = data[0];
 
-    document.getElementById("bg").src = gambar;
+// ambil gambar google drive id
+let gambar = item.gambar || "";
 
-    document.getElementById("textIsi").textContent =
-      item.judul || "";
-  } catch (e) {
-    console.error(e);
-  }
+// convert /file/d/xxx/view jadi thumbnail
+let match = gambar.match(/\/d\/(.*?)\//);
+
+if(match){
+  gambar = "https://drive.google.com/thumbnail?id=" + match[1] + "&sz=w1600";
 }
+
+document.getElementById("bg").src = gambar;
+document.getElementById("text").innerText = item.judul || "Tanpa Judul";
+
+}catch(err){
+
+console.log(err);
+document.getElementById("text").innerText = "Gagal load data";
+
+}
+
+}
+
+loadData();
