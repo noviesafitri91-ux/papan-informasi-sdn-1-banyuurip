@@ -11,14 +11,11 @@ body{
 /* GAMBAR */
 #bg{
   position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%);
-  max-width:100%;
-  max-height:100%;
-  width:auto;
-  height:auto;
-  object-fit:contain;
+  top:0;
+  left:0;
+  width:100vw;
+  height:100vh;
+  object-fit:scale-down;
   background:black;
 }
 
