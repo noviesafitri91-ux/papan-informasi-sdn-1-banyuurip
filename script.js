@@ -3,20 +3,25 @@ const URL = "https://script.google.com/macros/s/AKfycbxbBwiVfevQU9YKw-EE_7sN800W
 let index = 0;
 let dataGlobal = [];
 
-/* JAM DIGITAL */
-function updateClock(){
-  const now = new Date();
+document.addEventListener("DOMContentLoaded", function(){
 
-  const waktu = now.toLocaleTimeString("id-ID");
-  const tanggal = now.toLocaleDateString("id-ID");
+  function updateClock(){
+    const now = new Date();
 
-  document.getElementById("clock").innerText =
-    tanggal + " | " + waktu;
-}
+    const waktu = now.toLocaleTimeString("id-ID");
+    const tanggal = now.toLocaleDateString("id-ID");
 
-setInterval(updateClock, 1000);
-updateClock();
+    const el = document.getElementById("clock");
 
+    if(el){
+      el.innerText = tanggal + " | " + waktu;
+    }
+  }
+
+  updateClock();
+  setInterval(updateClock, 1000);
+
+});
 
 /* TAMPIL DATA */
 function showData(){
