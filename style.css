@@ -1,51 +1,49 @@
 html, body{
   height:100%;
-}
-
-body{
   margin:0;
   overflow:hidden;
   background:black;
-  font-family:Arial, sans-serif;
+  font-family:Arial;
 }
 
-/* HEADER */
+/* ===== HEADER ===== */
 #header{
   position:fixed;
   top:0;
   left:0;
   width:100%;
   height:50px;
-  background:rgba(0,0,0,0.7);
-  z-index:9999;
+  background:rgba(0,0,0,0.75);
+  z-index:10000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 #title{
   color:white;
-  font-size:20px;
+  font-size:18px;
   font-weight:bold;
-  text-align:center;
-  letter-spacing:1px;
 }
 
-/* JAM */
+/* ===== CLOCK (DI BAWAH HEADER) ===== */
 #clock{
   position:fixed;
-  top:60px;
+  top:50px;
   right:10px;
   color:white;
   background:rgba(0,0,0,0.6);
   padding:5px 8px;
   font-size:14px;
   border-radius:5px;
-  z-index:9999;
+  z-index:10000;
 }
 
-/* GAMBAR */
+/* ===== GAMBAR (AMAN DARI HEADER & FOOTER) ===== */
 #bg{
   position:fixed;
-  top:60px;
-  bottom:60px;
+  top:50px;      /* penting */
+  bottom:60px;   /* penting */
   left:0;
   width:100%;
   height:auto;
@@ -53,26 +51,27 @@ body{
   background:black;
   opacity:1;
   transition:opacity 1s ease-in-out;
+  z-index:1;
 }
 
-/* RUNNING TEXT */
+/* ===== RUNNING TEXT ===== */
 #Running_Text{
   position:fixed;
   bottom:0;
   left:0;
   width:100%;
   height:60px;
-  background:rgba(0,0,0,0.85);
+  background:rgba(0,0,0,0.9);
   display:flex;
   align-items:center;
   overflow:hidden;
   border-top:2px solid yellow;
-  z-index:9999;
+  z-index:10000;
 }
 
 #text{
   color:yellow;
-  font-size:24px;
+  font-size:22px;
   white-space:nowrap;
   padding-left:100%;
   display:inline-block;
