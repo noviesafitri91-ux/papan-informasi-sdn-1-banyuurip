@@ -1,4 +1,4 @@
-const URL = "https://script.google.com/macros/s/AKfycbyd3h9ZvUNybp4vKA-7grHeNSvRsWnzWU0UkPwcc2nZE-GWm1XWJuDSbdvSsEfcsJ5oxA/exec";
+const URL = "https://script.google.com/macros/s/AKfycbxbBwiVfevQU9YKw-EE_7sN800WfkWFD61dBs69IKdLUX-hPl6y7kBkjtWprIjMkK3pTA/exec";
 
 async function loadData(){
   try {
