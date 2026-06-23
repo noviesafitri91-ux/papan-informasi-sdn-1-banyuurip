@@ -12,11 +12,20 @@ async function loadData() {
     const aktif = data.find(item => item.aktif === "YA");
 
     if (aktif) {
-      console.log("TEKS:", aktif.teks);
 
-      document.getElementById("runningText").innerText = aktif.teks;
+      // set background image
+      document.getElementById("bg").src = aktif.gambar;
+
+      // set running text (WAJIB pakai span biar jalan)
+      document.getElementById("runningText").innerHTML =
+        "<span>" + aktif.teks + "</span>";
+
+    } else {
+      document.getElementById("runningText").innerText = "TIDAK ADA DATA AKTIF";
     }
-  } catch (err) {
-    console.error("ERROR:", err);
+
+  } catch (error) {
+    console.error("ERROR:", error);
+    document.getElementById("runningText").innerText = "GAGAL LOAD DATA";
   }
 }
