@@ -11,33 +11,33 @@ body {
   background: black;
 }
 
-/* Gambar background */
 #bg {
   width: 100vw;
   height: 100vh;
   object-fit: cover;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 1;
 }
 
-/* Running text container */
 #runningText {
-  position: absolute;
-  bottom: 20px;
+  position: fixed;
+  bottom: 0;
   width: 100%;
-  z-index: 9999;
-  background: rgba(0,0,0,0.6);
+  height: 50px;
+  background: rgba(0,0,0,0.7);
   overflow: hidden;
-  color: yellow;
-  font-size: 24px;
-  white-space: nowrap;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
 }
 
-/* animasi berjalan */
 #runningText span {
   display: inline-block;
+  white-space: nowrap;
+  color: yellow;
+  font-size: 24px;
   padding-left: 100%;
   animation: jalan 12s linear infinite;
 }
