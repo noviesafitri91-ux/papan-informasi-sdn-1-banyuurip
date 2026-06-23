@@ -2,11 +2,11 @@ const URL = "https://script.google.com/macros/s/AKfycbxbBwiVfevQU9YKw-EE_7sN800W
 
 let dataGlobal = [];
 let index = 0;
+let timer = null;
 
 /* JAM */
 function updateClock(){
   const now = new Date();
-
   document.getElementById("clock").innerText =
     now.toLocaleDateString("id-ID") + " | " +
     now.toLocaleTimeString("id-ID");
@@ -15,7 +15,7 @@ setInterval(updateClock, 1000);
 updateClock();
 
 
-/* TAMPIL SLIDE HALUS */
+/* SLIDE UTAMA */
 function showSlide(){
 
   if(!dataGlobal || dataGlobal.length === 0) return;
@@ -43,27 +43,26 @@ function showSlide(){
     // FADE IN
     bg.style.opacity = 1;
 
-    // RUNNING TEXT RESET
+    // RUNNING TEXT
     textEl.innerText = item.teks || "";
 
     textEl.style.animation = "none";
     void textEl.offsetWidth;
     textEl.style.animation = "marquee 20s linear";
 
-    /* DURASI AKURAT */
-    const panjang = textEl.innerText.length;
-
-    // hitung lebih realistis + minimal 12 detik
-    const durasi = Math.max(12000, panjang * 180);
-
+    // NEXT INDEX
     index++;
     if(index >= dataGlobal.length){
       index = 0;
     }
 
-    setTimeout(showSlide, durasi);
+    // 🔥 FIX PENTING: DURASI TETAP (BUKAN BERGANTUNG TEKS)
+    const durasiSlide = 15000; // 15 detik stabil
 
-  }, 800); // delay transisi fade
+    clearTimeout(timer);
+    timer = setTimeout(showSlide, durasiSlide);
+
+  }, 500); // fade cepat biar tidak delay lama
 }
 
 
