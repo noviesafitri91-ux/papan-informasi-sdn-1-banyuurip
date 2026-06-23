@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", loadData);
 
 async function loadData() {
   try {
-    const res = await fetch("URL_APPS_SCRIPT_KAMU");
+    const res = await fetch("https://script.google.com/macros/s/AKfycbxGjGwsDfX4aF7MkzBrXXw3rI7ItysygcRCmEgJVs1vUp6SAmhN_o2o4kCN-ViIQsOUag/exec");
     const data = await res.json();
 
     console.log("DATA:", data);
