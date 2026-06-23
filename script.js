@@ -1,36 +1,28 @@
 const URL = "https://script.google.com/macros/s/AKfycbxbBwiVfevQU9YKw-EE_7sN800WfkWFD61dBs69IKdLUX-hPl6y7kBkjtWprIjMkK3pTA/exec";
 
-let index = 0;
 let dataGlobal = [];
+let index = 0;
 
-document.addEventListener("DOMContentLoaded", function(){
+/* JAM */
+function updateClock(){
+  const now = new Date();
 
-  function updateClock(){
-    const now = new Date();
+  document.getElementById("clock").innerText =
+    now.toLocaleDateString("id-ID") + " | " +
+    now.toLocaleTimeString("id-ID");
+}
+setInterval(updateClock, 1000);
+updateClock();
 
-    const waktu = now.toLocaleTimeString("id-ID");
-    const tanggal = now.toLocaleDateString("id-ID");
 
-    const el = document.getElementById("clock");
+/* TAMPIL SLIDE */
+function showSlide(){
 
-    if(el){
-      el.innerText = tanggal + " | " + waktu;
-    }
-  }
-
-  updateClock();
-  setInterval(updateClock, 1000);
-
-});
-
-/* TAMPIL DATA */
-function showData(){
-
-  if(dataGlobal.length === 0) return;
+  if(!dataGlobal || dataGlobal.length === 0) return;
 
   const item = dataGlobal[index];
 
-  // GAMBAR
+  // GAMBAR DRIVE
   let gambar = item.gambar || "";
   let match = gambar.match(/\/d\/(.*?)\//);
 
@@ -38,14 +30,16 @@ function showData(){
     gambar = "https://drive.google.com/thumbnail?id=" + match[1] + "&sz=w1600";
   }
 
-  document.getElementById("bg").src = gambar;
+  // SET GAMBAR
+  const bg = document.getElementById("bg");
+  bg.src = gambar;
 
-  // RUNNING TEXT
+  // RUNNING TEXT PER GAMBAR
   document.getElementById("text").innerText =
     item.teks || "";
 
+  // NEXT INDEX
   index++;
-
   if(index >= dataGlobal.length){
     index = 0;
   }
@@ -62,17 +56,18 @@ async function loadData(){
 
     console.log("DATA:", dataGlobal);
 
-    showData();
+    // tampil pertama kali
+    showSlide();
 
-    setInterval(showData, 10000);
+    // slideshow otomatis
+    setInterval(showSlide, 8000);
 
   } catch(err){
     console.log(err);
     document.getElementById("text").innerText =
-      "Gagal load data";
+      "Gagal memuat data";
   }
 }
-
 
 /* START */
 loadData();
