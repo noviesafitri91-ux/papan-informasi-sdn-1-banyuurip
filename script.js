@@ -22,9 +22,8 @@ async function loadData(){
 
     document.getElementById("bg").src = gambar;
 
-    // ===== RUNNING TEXT (VERSI PALING AMAN) =====
     document.getElementById("text").innerText =
-      item.teks || "Tidak ada teks";
+  (data[0] && data[0].teks) ? data[0].teks : "Tidak ada teks";
 
   } catch(err) {
     console.log(err);
