@@ -1,12 +1,14 @@
 html, body{
   height:100%;
 }
+
 body{
   margin:0;
   overflow:hidden;
   background:black;
 }
 
+/* GAMBAR */
 #bg{
   position:fixed;
   inset:0;
@@ -16,11 +18,20 @@ body{
   background:black;
 }
 
-#bg.show{
-  opacity:1;
+/* JAM */
+#clock{
+  position:fixed;
+  top:10px;
+  right:15px;
+  color:white;
+  background:rgba(0,0,0,0.6);
+  padding:6px 10px;
+  font-size:18px;
+  border-radius:5px;
+  z-index:9999;
 }
 
-/* running text */
+/* RUNNING TEXT */
 #Running_Text{
   position:fixed;
   bottom:0;
