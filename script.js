@@ -1,32 +1,29 @@
-document.addEventListener("DOMContentLoaded", function () {
-  loadData();
-});
+document.addEventListener("DOMContentLoaded", loadData);
 
 async function loadData() {
   try {
-    const res = await fetch("https://script.google.com/macros/s/AKfycbz7DyIPNVTXBGPxfU5hToNXiRsgyLnlsszZGt647vgqmBSWXu1Oiv0AfBXJ9FpHyBW3Lw/exec");
+    const res = await fetch("URL_APPS_SCRIPT_KAMU");
     const data = await res.json();
 
     console.log("DATA:", data);
 
-    const aktif = data.find(item => item.aktif === "YA");
+    if (!data || data.length === 0) return;
 
-    if (aktif) {
+    const item = data[0];
 
-      // GAMBAR
-      const bg = document.getElementById("bg");
-      bg.src = aktif.gambar;
+    // GANTI LINK DRIVE MENJADI LINK GAMBAR LANGSUNG
+    let gambar = item.gambar || "";
 
-      // RUNNING TEXT
-      document.getElementById("runningText").innerHTML =
-        "<span>" + aktif.teks + "</span>";
+    gambar = gambar.replace(
+      /https:\/\/drive\.google\.com\/file\/d\/(.*?)\/view.*/,
+      "https://drive.google.com/thumbnail?id=$1&sz=w1600"
+    );
 
-    } else {
-      document.getElementById("runningText").innerText = "TIDAK ADA DATA AKTIF";
-    }
+    document.getElementById("bg").src = gambar;
 
-  } catch (err) {
-    console.error("ERROR:", err);
-    document.getElementById("runningText").innerText = "GAGAL LOAD DATA";
+    document.getElementById("textIsi").textContent =
+      item.judul || "";
+  } catch (e) {
+    console.error(e);
   }
 }
