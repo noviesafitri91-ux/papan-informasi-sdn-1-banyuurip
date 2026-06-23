@@ -6,19 +6,26 @@ body{
   margin:0;
   overflow:hidden;
   background:black;
+  font-family:Arial, sans-serif;
 }
 
-/* GAMBAR */
-#bg{
+/* HEADER */
+#header{
   position:fixed;
-  inset:0;
+  top:0;
+  left:0;
   width:100%;
-  height:100%;
-  object-fit:contain;
-  background:black;
+  padding:10px;
+  background:rgba(0,0,0,0.5);
+  z-index:9999;
+}
 
-  opacity:1;
-  transition:opacity 1.2s ease;
+#title{
+  color:white;
+  font-size:20px;
+  font-weight:bold;
+  text-align:center;
+  letter-spacing:1px;
 }
 
 /* JAM */
@@ -29,8 +36,21 @@ body{
   color:white;
   background:rgba(0,0,0,0.6);
   padding:6px 10px;
-  font-size:18px;
-  z-index:999999;
+  font-size:16px;
+  border-radius:5px;
+  z-index:9999;
+}
+
+/* GAMBAR */
+#bg{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:black;
+  opacity:1;
+  transition:opacity 1s ease-in-out;
 }
 
 /* RUNNING TEXT */
@@ -45,11 +65,12 @@ body{
   align-items:center;
   overflow:hidden;
   border-top:2px solid yellow;
+  z-index:9999;
 }
 
 #text{
   color:yellow;
-  font-size:26px;
+  font-size:24px;
   white-space:nowrap;
   padding-left:100%;
   display:inline-block;
