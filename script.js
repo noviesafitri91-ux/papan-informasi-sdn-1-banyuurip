@@ -24,7 +24,7 @@ if(match){
 }
 
 document.getElementById("bg").src = gambar;
-document.getElementById("text").innerText = item.judul || "Tanpa Judul";
+document.getElementById("text").innerText = item.runningtext || "";
 
 }catch(err){
 
