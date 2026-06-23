@@ -24,7 +24,7 @@ if(match){
 }
 
 document.getElementById("bg").src = gambar;
-document.getElementById("text").innerText = item.runningtext || "";
+document.getElementById("text").innerText = item.Running_text || "";
 
 }catch(err){
 
