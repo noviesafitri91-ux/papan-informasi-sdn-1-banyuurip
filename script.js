@@ -7,16 +7,16 @@ async function loadData() {
     const res = await fetch("https://script.google.com/macros/s/AKfycbz7DyIPNVTXBGPxfU5hToNXiRsgyLnlsszZGt647vgqmBSWXu1Oiv0AfBXJ9FpHyBW3Lw/exec");
     const data = await res.json();
 
-    console.log("DATA MASUK:", data);
+    console.log("DATA:", data);
 
     const aktif = data.find(item => item.aktif === "YA");
 
     if (aktif) {
 
-      // set background image
+      // 🔥 GAMBAR
       document.getElementById("bg").src = aktif.gambar;
 
-      // set running text (WAJIB pakai span biar jalan)
+      // 🔥 RUNNING TEXT
       document.getElementById("runningText").innerHTML =
         "<span>" + aktif.teks + "</span>";
 
@@ -24,8 +24,8 @@ async function loadData() {
       document.getElementById("runningText").innerText = "TIDAK ADA DATA AKTIF";
     }
 
-  } catch (error) {
-    console.error("ERROR:", error);
+  } catch (err) {
+    console.error("ERROR:", err);
     document.getElementById("runningText").innerText = "GAGAL LOAD DATA";
   }
 }
